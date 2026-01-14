@@ -1,1 +1,1 @@
-# memo
+# this site is still in the development stages so its subjected to changes
