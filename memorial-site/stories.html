@@ -74,13 +74,150 @@
     .stories a:hover {
         text-decoration: underline;
     }
-    @media (max-width: 900px) {
-        .page-container{
-            flex-direction: column;
-                text-align: center;
-                gap: 30px;
-        }
+       /* Responsive Design for Stories Page */
+
+/* Tablet Devices (768px - 1024px) */
+@media (max-width: 1024px) {
+    .grid-story {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+        gap: 25px;
     }
+    
+    .stories {
+        padding: 35px;
+    }
+    
+    .container h1 {
+        font-size: 2.2rem;
+    }
+    
+    .container p {
+        font-size: 1.1rem;
+    }
+}
+
+/* Medium Mobile Devices (600px - 768px) */
+@media (max-width: 768px) {
+    section {
+        padding: 30px 15px;
+    }
+    
+    .grid-story {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+        gap: 20px;
+        max-width: 600px;
+    }
+    
+    .stories {
+        padding: 30px;
+        margin-bottom: 15px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .container h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    
+    .container p {
+        margin-bottom: 25px;
+        font-size: 1rem;
+    }
+}
+
+/* Small Mobile Devices (below 600px) */
+@media (max-width: 600px) {
+    section {
+        padding: 25px 10px;
+    }
+    
+    .grid-story {
+        gap: 15px;
+    }
+    
+    .stories {
+        padding: 25px 20px;
+    }
+    
+    .stories h2 {
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+    }
+    
+    .stories p {
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+    
+    .container h1 {
+        font-size: 1.8rem;
+    }
+    
+    .container p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Extra Small Devices (below 480px) */
+@media (max-width: 480px) {
+    section {
+        padding: 20px 10px;
+    }
+    
+    .stories {
+        padding: 20px 15px;
+    }
+    
+    .stories h2 {
+        font-size: 1.2rem;
+    }
+    
+    .container h1 {
+        font-size: 1.6rem;
+    }
+}
+
+/* Navigation Responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 0;
+    }
+    
+    .nav-links {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-links li {
+        margin: 5px 0;
+    }
+    
+    .nav-links a {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+/* Landscape Orientation on Mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    section {
+        padding: 20px;
+    }
+    
+    .grid-story {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .stories {
+        padding: 20px;
+    }
+}
 </style>
 
     
