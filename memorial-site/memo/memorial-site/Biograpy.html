@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biography | Remembering [Name]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Crimson+Text:ital,wght@0,400;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         /* Biography Page Specific Styles */
@@ -128,12 +131,15 @@
         
         /* Full-width Text Section */
         .full-width-section {
+            grid-column: 1 / span 3;
+            grid-row: 3;
             margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #eee;
             display: grid;
             grid-template-columns: 1fr 250px;
             gap: 35px;
+            margin-top: 200px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
         }
         
         .full-width-text {
@@ -175,11 +181,13 @@
             .horizontal-break{
                 grid-column: 1 / span 2;
                 }
-            /* .side-pictures {
+            .side-pictures {
                 display: none;
             }
-             */
+            
             .full-width-section {
+                grid-column: 1 / span 2;
+                grid-row: 3;
             }
             
             .side-pic-3 {
@@ -212,6 +220,8 @@
             }
             
             .full-width-section {
+                grid-column: 1;
+                grid-row: 4;
                 grid-template-columns: 1fr;
             }
             
@@ -329,34 +339,32 @@
                 </div>
             </div>
             
-        </div>
-        
-        <!-- Full-width section moved outside -->
-        <div class="full-width-section" >
-            <div class="full-width-text">
+            <!-- Full-width section -->
+            <div class="full-width-section" >
+                <div class="full-width-text">
+                    
+                    
+                    <div class="bio-paragraph">
+                        <p>ሰው ያልፋል ግን ለወገኑ የማያልፍ ነገር መስራት አለበት፡፡ የሚለውን የህይወት ፍልስፍናቸው አድርገው የያዙት አቶ ኡርጌሳ በሰሩባቸው ተቋማትና በግል
+                            ቢዝነሶቻቸው ለሀገር ካበረከቷቸው አገልግሎቶች በተጨማሪ ለትውልድ አካባቢያቸው ዜጎችን ተጠቃሚ የሚያደርጉ በርካታ ሥራዎችን ሠርተዋል፡፡ ከእነዚህም ለአብነት፡- ከቱሉ ቦሎ እስከ አጨበር ያለውን መንገድ በመቀየስ አስተባብረው እንዲሠራ አድርገዋል፡፡ የድልድዮች ግባታና የውሃ መስመሮች እንዲዘረጉ ሠርተዋል፡፡ በአካባቢው ለሚገኙ የአንደኛ እና የሁለተና ደረጃ ትምህርት ቤቶች በየጊዜው ድጋፍ ከማድረጋቸው በተጨማሪ በትምህርት ቤቶቹ ከፍተኛ
+                            ውጤት ያመጡትን ተማሪዎች በመሸለምና የከፍተኛ ትምህርት ወጪያቸውን በማገዝ ከፍተኛ ድጋፍ አድርገዋል፡፡ በዚህም ለአካባቢው ነዋሪዎች አርአያ ሆነዋል፡፡ አቶ ኡርጌሳ በ1958 ዓ.ም ከወ/ሮ ቀለሟ ተሰማ ጋር ትዳር የመሠረቱ ሲሆን፣ ከዚህም ምስጉንና ተጠቃሽ የትዳር ሕይወት 9 ልጆችን እና 13 የልጅ ልጆችን አፍርተዋል፡፡ ልጆቻቸውንም በስነምግባርና በዕውቀት አሳድገው ለቁም ነገር አብቅተዋል፡፡ ከዚህ በተጨማሪ ታናናሽ ወንድሞቻቸውን እና እህቶቻቸውን
+                            አስተምረዋል፡፡ በርካታ የዘመድ ልጆችንም አሳድገውና አስተምረው ለፍሬ እንዲበቁ አድርገዋል፡፡</p>
+                    </div>
+                    
+                    <div class="bio-paragraph">
+                        <p>አቶ ኡርጌሳ በማህበራዊ ሕይወታቸው ከፍተኛ ክብርና ሞገስ የተቸራቸው የሀገርና የማህበረሰብ ሽማግሌ ነበሩ፡፡ በባህሪያቸውም ግልጽ፣ ቀጥተኛና ለማንም የማያደሉ
+                            ሚዛናዊ፣ ሁሉንም እኩል የሚመለከቱ፣ ያመኑበትን ፊት ለፊት የሚናገሩና የሚፈጽሙ አባት ነበሩ፡፡ ለማወቅም ከነበራቸው ከፍተኛ ጉጉት የተነሳ በየቀኑ ሰዓት ሰጥተው የሚያነቡ፣ አዳዲስና ጠቃሚ ሐሳብ አላቸው ከሚሏቸው ሰዎች ጋር የሚወያዩ፣ ሁሌም መጠየቅን የሚወዱ፣ የሚያውቁትን የሚያካፍሉ፣ ታሪክ አዋቂ፣
+                            እጅግ ትሁትና ታላቅ አባት ነበሩ፡፡ ሆኖም ምንጊዜም የሰው ልጅ ከዓለም ውጣ ውረድ ያርፍ ዘንድ ወደ ፈጣሪው መጠራቱ የእግዚአብሔር አሠራር በመሆኑ፣ እኝህ ታላቅና ለብዙዎች ከለላ ሆነው የኖሩት አባታችን ባደረባቸው ህመም በህክምና ሲረዱ ቆይተው ግንቦት 24 ቀን 2015 ዓ.ም ከዚህ አለም ድካም አርፈዋል፡፡ ቀብራቸውም ዛሬ ግንቦት 25 ቀን ከቀኑ
+                            በ8፡00 በረጲ ጎልጎታ መድሐኒያለም ቤተ ክርስቲያን ተፈጽሟል፡፡</p>
+                    </div>                   
+                   </div>
                 
-                
-                <div class="bio-paragraph">
-                    <p>ሰው ያልፋል ግን ለወገኑ የማያልፍ ነገር መስራት አለበት፡፡ የሚለውን የህይወት ፍልስፍናቸው አድርገው የያዙት አቶ ኡርጌሳ በሰሩባቸው ተቋማትና በግል
-                        ቢዝነሶቻቸው ለሀገር ካበረከቷቸው አገልግሎቶች በተጨማሪ ለትውልድ አካባቢያቸው ዜጎችን ተጠቃሚ የሚያደርጉ በርካታ ሥራዎችን ሠርተዋል፡፡ ከእነዚህም ለአብነት፡- ከቱሉ ቦሎ እስከ አጨበር ያለውን መንገድ በመቀየስ አስተባብረው እንዲሠራ አድርገዋል፡፡ የድልድዮች ግባታና የውሃ መስመሮች እንዲዘረጉ ሠርተዋል፡፡ በአካባቢው ለሚገኙ የአንደኛ እና የሁለተና ደረጃ ትምህርት ቤቶች በየጊዜው ድጋፍ ከማድረጋቸው በተጨማሪ በትምህርት ቤቶቹ ከፍተኛ
-                        ውጤት ያመጡትን ተማሪዎች በመሸለምና የከፍተኛ ትምህርት ወጪያቸውን በማገዝ ከፍተኛ ድጋፍ አድርገዋል፡፡ በዚህም ለአካባቢው ነዋሪዎች አርአያ ሆነዋል፡፡ አቶ ኡርጌሳ በ1958 ዓ.ም ከወ/ሮ ቀለሟ ተሰማ ጋር ትዳር የመሠረቱ ሲሆን፣ ከዚህም ምስጉንና ተጠቃሽ የትዳር ሕይወት 9 ልጆችን እና 13 የልጅ ልጆችን አፍርተዋል፡፡ ልጆቻቸውንም በስነምግባርና በዕውቀት አሳድገው ለቁም ነገር አብቅተዋል፡፡ ከዚህ በተጨማሪ ታናናሽ ወንድሞቻቸውን እና እህቶቻቸውን
-                        አስተምረዋል፡፡ በርካታ የዘመድ ልጆችንም አሳድገውና አስተምረው ለፍሬ እንዲበቁ አድርገዋል፡፡</p>
+                <div class="side-pic-3">
+                    <img src="assets/a9ae84472d6182a6db739e8b087aedde.jpg" alt="Later years" class="side-image">
+                    <p class="side-caption">[Name] in later years</p>
                 </div>
-                
-                <div class="bio-paragraph">
-                    <p>አቶ ኡርጌሳ በማህበራዊ ሕይወታቸው ከፍተኛ ክብርና ሞገስ የተቸራቸው የሀገርና የማህበረሰብ ሽማግሌ ነበሩ፡፡ በባህሪያቸውም ግልጽ፣ ቀጥተኛና ለማንም የማያደሉ
-                        ሚዛናዊ፣ ሁሉንም እኩል የሚመለከቱ፣ ያመኑበትን ፊት ለፊት የሚናገሩና የሚፈጽሙ አባት ነበሩ፡፡ ለማወቅም ከነበራቸው ከፍተኛ ጉጉት የተነሳ በየቀኑ ሰዓት ሰጥተው የሚያነቡ፣ አዳዲስና ጠቃሚ ሐሳብ አላቸው ከሚሏቸው ሰዎች ጋር የሚወያዩ፣ ሁሌም መጠየቅን የሚወዱ፣ የሚያውቁትን የሚያካፍሉ፣ ታሪክ አዋቂ፣
-                        እጅግ ትሁትና ታላቅ አባት ነበሩ፡፡ ሆኖም ምንጊዜም የሰው ልጅ ከዓለም ውጣ ውረድ ያርፍ ዘንድ ወደ ፈጣሪው መጠራቱ የእግዚአብሔር አሠራር በመሆኑ፣ እኝህ ታላቅና ለብዙዎች ከለላ ሆነው የኖሩት አባታችን ባደረባቸው ህመም በህክምና ሲረዱ ቆይተው ግንቦት 24 ቀን 2015 ዓ.ም ከዚህ አለም ድካም አርፈዋል፡፡ ቀብራቸውም ዛሬ ግንቦት 25 ቀን ከቀኑ
-                        በ8፡00 በረጲ ጎልጎታ መድሐኒያለም ቤተ ክርስቲያን ተፈጽሟል፡፡</p>
-                </div>                   
-               </div>
-            
-            <div class="side-pic-3">
-                <img src="assets/a9ae84472d6182a6db739e8b087aedde.jpg" alt="Later years" class="side-image">
-                <p class="side-caption">[Name] in later years</p>
             </div>
         </div>
-    </div>
     </div>
     
     <!-- Footer - Using consistent footer class -->
