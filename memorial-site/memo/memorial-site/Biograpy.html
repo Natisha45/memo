@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biography | Remembering [Name]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Crimson+Text:ital,wght@0,400;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Biography Page Specific Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .page-title {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .page-subtitle {
+            color: #777;
+            font-size: 18px;
+            font-weight: 300;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        /* Main Layout Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr 250px;
+            grid-template-rows: auto auto auto;
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+        
+        /* Profile Picture Column */
+        .profile-column {
+             grid-column: 1;
+            grid-row: 1;
+            align-self: start;
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 200px); /* Limits sticking area */
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+         .profile-column::after{
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 50px;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 2%;
+
+        }
+        
+        .profile-image {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 3px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .profile-caption {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        /* Main Text Column */
+        .text-column {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        
+        .bio-text {
+            font-size: 17px;
+            line-height: 1.9;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .bio-paragraph {
+            margin-bottom: 25px;
+        }
+    
+        
+        /* Side Pictures Column */
+        .side-pictures {
+            grid-column: 3;
+            grid-row: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .side-image {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+        
+        .side-caption {
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+            margin-top: 8px;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        /* Full-width Text Section */
+        .full-width-section {
+            grid-column: 1 / span 3;
+            grid-row: 3;
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: 1fr 250px;
+            gap: 35px;
+            margin-top: 200px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        .full-width-text {
+            font-size: 17px;
+            line-height: 1.9;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .full-width-text p {
+            margin-bottom: 25px;
+        }
+        
+        /* Side picture 3 */
+        .side-pic-3 {
+            margin-top: 10px;
+        }
+        
+        /* Biography Page Footer */
+        .biography-footer {
+            text-align: center;
+            padding: 50px 0 30px;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 250px 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            .profile-column {
+                grid-column: 1;
+                grid-row: 1;
+                position: sticky;
+            }
+            .horizontal-break{
+                grid-column: 1 / span 2;
+                }
+            .side-pictures {
+                display: none;
+            }
+            
+            .full-width-section {
+                grid-column: 1 / span 2;
+                grid-row: 3;
+            }
+            
+            .side-pic-3 {
+                text-align: center;
+                max-width: 300px;
+                margin: 20px auto 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto;
+                gap: 40px;
+            }
+            
+            .profile-column {
+                position: static;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .horizontal-break{
+                grid-column: 1;
+                grid-row: 3;
+            }
+            
+            .text-column {
+                grid-column: 1;
+                grid-row: 2;
+            }
+            
+            .full-width-section {
+                grid-column: 1;
+                grid-row: 4;
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 34px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .bio-text, .full-width-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - Using consistent style from style.css -->
+    <nav class="navbar">
+         <input type="checkbox" id="Sidebar-active">
+        <label for="Sidebar-active" class="open-sidebar-btn"><img src="assets/menu_32dp_E3E3E3_FILL0_wght400_GRAD0_opsz40.svg" alt=""></label>
+     
+        <ul class="nav-links">
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="Biograpy.html" class="active">Biography</a></li>
+            <li><a href="Gallery.html">Memories</a></li>
+            <li><a href="stories.html">Story</a></li>
+            <li><a href="share.html">Share</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">አቶ ኡርጌሳ ዋኬኔ</h1>
+            <p class="page-subtitle">[Birth Date] - [Passing Date]</p>
+        </header>
+        
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            <!-- Column 1: Profile Picture -->
+            <div class="profile-column">
+                <img src="assets/0b99a070c0d283ec4672dfeff042aaea.jpg" alt="[Name]" class="profile-image">
+                <p class="profile-caption">[Name] in [Year/Location]</p>
+            </div>
+            
+            <!-- Column 2: Main Text -->
+            <div class="text-column">
+                <div class="bio-text">
+                    <div class="bio-paragraph first">
+                        <p>አቶ ኡርጌሳ ዋኬኔ ደበሎ ከአርበኛው አባታቸው ከዋኬኔ ደበሎ እና ከእናታቸው
+                            ከወ/ሮ ኢፍቱ ፉሪ ሚያዝያ 5 ቀን 1933 ዓ.ም በቀድሞ አጠራሩ በሸዋ ጠቅላይ
+                            ግዛት በጨቦና ጉራጌ አውራጃ አጨበር ልዩ ስሙ የጠጠር ተብሎ በሚጠራ ቦታ
+                            ተወለዱ፡፡</p>
+                    </div>
+                    
+                    <div class="bio_paragraph_second">
+                          <p>የወቅቱ መንግስት ፔፕሲ ኮላ ድርጅትን በመውረስ 20/45 የሚል
+                            አሰራር በማምጣት ሠራተኞችን ጡረታ ማውጣት ሲጀምር፣ አዳዲስ ሐሳቦችን የመፍጠርና የመተግበር ልዩ የሆነ ችሎታ የነበራቸው አቶ ኡርጌሳ የመኪና
+                            ባለንብረቶችን በማሰባሰብ ብርሃን የጭነት ማመላለሻ ማህበር በሚል የሰየሙትን ማህበር የመሠረቱ ሲሆን፣ ይህንንም ማህበር የቦርድ ሊቀመንበር ሆነው
+                            መርተዋል፡፡ይህንን ማህበር ደርግ ወርሶ ጭማድ በሚል ስያሜ እንዲቀጥል ሲያደርገው ድርጅቱ ውጤታማ እንዲሆን አቶ ኡርጌሳን ማምጣት ተገቢ መሆኑን
+                            በመገንዘቡ ለአቶ ኡርጌሳ ጥያቄ በማቅረብ ድርጅቱን እንዲቀላቀሉ አድርጓቸዋል፡፡ </p>
+                        <p class="below_img"> 
+                            ይህንንም ድርጅት በየጊዜው የቦርዱ አባላት ከነበሩት ከእነኮሎኔል ጎሹ ወልዴ፣ ኢንጅነር ካሣ ገብሬ፣ ካሣ ተሰማ እና ሌሎች ጋር በመሆን ከቀጠና ኃላፊ እስከ
+                            መምሪያ ኃላፊ በመሆን ጡረታ ጠይቀው እስከ ወጡበት እስከ 1986 ዓ.ም ድረስ አገልግለዋል፡፡ በትራንስፖርቱ ዘርፍ በነበራቸው አገልግሎትም የውይይት ታክሲን
+                            ሐሳብ አፍልቀው ወደሥራ ማስገባትን ጨምሮ አሠራሮችን በማዘመን እና አዳዲስ አሠራሮችን በመተግበር ተጠቃሽ ታሪክን ጽፈዋል፡፡
+                            እንዲሁም አቶ ኡርጌሳ ዋኬኔ የከፍተኛ 24 የቀበሌ 11 የመጀመሪያው ሊቀመንበር በመሆን አገልግለዋል፡፡ በዚህም የአገልግሎት ዘመናቸው በርካቶች የቀበሌ ቤትና
+                            ቤት መስሪያ ቦታዎችን እንዲያገኙ ከማገዛቸውም በተጨማሪ፣ ለነዋሪው ትምህርት ቤቶችን ገንብተዋል፡፡ የቀበሌው ነዋሪዎችም የተሻለ አገልግሎት እንዲያገኙ
+                            የበኩላቸውን አድርገዋል፡፡</p>
+                    </div>
+                    <div class="bio-paragraph">
+                        <p>አቶ ኡርጌሳ ዋኬኔ የግል ቢዝነሳቸውን የጀመሩት በቀዳማዊ ኃይለ ሥላሴ መንግስት አምቦ ውሃን በማከፋፈል ሲሆን፣ በወቅቱ እሳቸው የመንግስት ሠራተኛ በመሆናቸውና ሥራንም እንዳይበድሉ በማሰብ ታናናሽ ወንድሞቻቸውን በሥራው
+                            ላይ በማሳተፍ ነበር፡፡ በዚህም አብሯቸው የሚሰራውን ድርጅትና ደንበኞችን በማርካታቸው በምስራቁ የሀገራችን ክፍል ብቸኛው የአምቦ ውሃ እና የፔፕሲ ኮላ
+                            ወኪል እንዲሆኑ አድርጓል፡፡
+                            አቶ ኡርጌሳ በኋላም ሥራቸውን በማስፋፋት፣ የህዝብ ትራንስፖርት መኪኖችን በመግዛት በዘርፉ የተሰማሩ ሲሆን፣ በዚህም ውጤታማ የሆነ አገልግሎት
+                            ሰጥተዋል፡፡ በኋላም፣ እጅግ በሚወዷቸውና ሩቅ አሳቢ ነበር በሚሏቸው በአባታቸው በዋኬኔ ስም የሰየሙትን የንግድ አገልግሎት መስጫ ተቋም የመሰረቱ ሲሆን፣
+                            ይህም አዋጪ የቢዝነስ ተቋም ሆኖ አገልግሎት በመስጠት ላይ ይገኛል፡፡ በልዩ ልዩ ባንኮች እና የአክሲዎን ቢዝነሶችም ውስጥም ባደረጓቸው ተሳትፎዎች አዋጪ
+                            ውጤቶችን አስመዝግበዋል፡፡ በንግዱ መስክ በስመዘገቧቸው ውጤቶችም ለተከታታይ ዓመታት በከፍተኛ ደረጃ ተሸልመዋል፡፡ 
+                            አቶ ኡርጌሳ የሰው ልጅ ከፈጣሪው የተሰጠው መብቱ ተከብሮለት ሊኖር ይገባል የሚል የጸና እምነት የነበራቸው በመሆኑ፣ ለዚሁ ለመታገል ከወጣትነታቸው ጀምሮ
+                            እስካሁንም ድረስ በተለያዩ የፖለቲካ ፓርቲዎች ውስጥ በመሳተፍ የነቃ ትግል አድርገዋል፡፡ በዚህም በሜጫና ቱለማ ማህበር አባል፣ የሶዶ ጂዳ የፖለቲካ ድርጅት
+                            መስራችና ዋና ጸሐፊ፣ የኦሮሞ ፌዴራላዊ ኮንግረንስ (ኦፌኮ) መስራችና ከፍተኛ አመራር እንዲሁም የኦሮሞ ነጻነት ግንባር (ኦነግ) አባል በመሆን ለሰው ልጅ
+                            መብትና ዲሞክራሲ ታግለዋል፡፡</p>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+            <div class="horizontal-break"></div>
+            
+            <!-- Column 3: Side Pictures -->
+            <div class="side-pictures">
+                <div>
+                    <img src="assets/8a4ce01d84ecbc2272755a614ec811fe.jpg" alt="Childhood photo" class="side-image">
+                    <p class="side-caption">Early years, [Year]</p>
+                </div>
+                <div>
+                    <img src="assets/df5fd39cb79d9d7025e33e6d24e7da38.jpg" alt="Family photo" class="side-image">
+                    <p class="side-caption">With family, [Year]</p>
+                </div>
+                <div>
+                    <img src="assets/df5fd39cb79d9d7025e33e6d24e7da38.jpg" alt="Family photo" class="side-image">
+                    <p class="side-caption">With family, [Year]</p>
+                </div>
+                <div>
+                    <img src="assets/df5fd39cb79d9d7025e33e6d24e7da38.jpg" alt="Family photo" class="side-image">
+                    <p class="side-caption">With family, [Year]</p>
+                </div>
+                <div>
+                    <img src="assets/df5fd39cb79d9d7025e33e6d24e7da38.jpg" alt="Family photo" class="side-image">
+                    <p class="side-caption">With family, [Year]</p>
+                </div>
+            </div>
+            
+            <!-- Full-width section -->
+            <div class="full-width-section" >
+                <div class="full-width-text">
+                    
+                    
+                    <div class="bio-paragraph">
+                        <p>ሰው ያልፋል ግን ለወገኑ የማያልፍ ነገር መስራት አለበት፡፡ የሚለውን የህይወት ፍልስፍናቸው አድርገው የያዙት አቶ ኡርጌሳ በሰሩባቸው ተቋማትና በግል
+                            ቢዝነሶቻቸው ለሀገር ካበረከቷቸው አገልግሎቶች በተጨማሪ ለትውልድ አካባቢያቸው ዜጎችን ተጠቃሚ የሚያደርጉ በርካታ ሥራዎችን ሠርተዋል፡፡ ከእነዚህም ለአብነት፡- ከቱሉ ቦሎ እስከ አጨበር ያለውን መንገድ በመቀየስ አስተባብረው እንዲሠራ አድርገዋል፡፡ የድልድዮች ግባታና የውሃ መስመሮች እንዲዘረጉ ሠርተዋል፡፡ በአካባቢው ለሚገኙ የአንደኛ እና የሁለተና ደረጃ ትምህርት ቤቶች በየጊዜው ድጋፍ ከማድረጋቸው በተጨማሪ በትምህርት ቤቶቹ ከፍተኛ
+                            ውጤት ያመጡትን ተማሪዎች በመሸለምና የከፍተኛ ትምህርት ወጪያቸውን በማገዝ ከፍተኛ ድጋፍ አድርገዋል፡፡ በዚህም ለአካባቢው ነዋሪዎች አርአያ ሆነዋል፡፡ አቶ ኡርጌሳ በ1958 ዓ.ም ከወ/ሮ ቀለሟ ተሰማ ጋር ትዳር የመሠረቱ ሲሆን፣ ከዚህም ምስጉንና ተጠቃሽ የትዳር ሕይወት 9 ልጆችን እና 13 የልጅ ልጆችን አፍርተዋል፡፡ ልጆቻቸውንም በስነምግባርና በዕውቀት አሳድገው ለቁም ነገር አብቅተዋል፡፡ ከዚህ በተጨማሪ ታናናሽ ወንድሞቻቸውን እና እህቶቻቸውን
+                            አስተምረዋል፡፡ በርካታ የዘመድ ልጆችንም አሳድገውና አስተምረው ለፍሬ እንዲበቁ አድርገዋል፡፡</p>
+                    </div>
+                    
+                    <div class="bio-paragraph">
+                        <p>አቶ ኡርጌሳ በማህበራዊ ሕይወታቸው ከፍተኛ ክብርና ሞገስ የተቸራቸው የሀገርና የማህበረሰብ ሽማግሌ ነበሩ፡፡ በባህሪያቸውም ግልጽ፣ ቀጥተኛና ለማንም የማያደሉ
+                            ሚዛናዊ፣ ሁሉንም እኩል የሚመለከቱ፣ ያመኑበትን ፊት ለፊት የሚናገሩና የሚፈጽሙ አባት ነበሩ፡፡ ለማወቅም ከነበራቸው ከፍተኛ ጉጉት የተነሳ በየቀኑ ሰዓት ሰጥተው የሚያነቡ፣ አዳዲስና ጠቃሚ ሐሳብ አላቸው ከሚሏቸው ሰዎች ጋር የሚወያዩ፣ ሁሌም መጠየቅን የሚወዱ፣ የሚያውቁትን የሚያካፍሉ፣ ታሪክ አዋቂ፣
+                            እጅግ ትሁትና ታላቅ አባት ነበሩ፡፡ ሆኖም ምንጊዜም የሰው ልጅ ከዓለም ውጣ ውረድ ያርፍ ዘንድ ወደ ፈጣሪው መጠራቱ የእግዚአብሔር አሠራር በመሆኑ፣ እኝህ ታላቅና ለብዙዎች ከለላ ሆነው የኖሩት አባታችን ባደረባቸው ህመም በህክምና ሲረዱ ቆይተው ግንቦት 24 ቀን 2015 ዓ.ም ከዚህ አለም ድካም አርፈዋል፡፡ ቀብራቸውም ዛሬ ግንቦት 25 ቀን ከቀኑ
+                            በ8፡00 በረጲ ጎልጎታ መድሐኒያለም ቤተ ክርስቲያን ተፈጽሟል፡፡</p>
+                    </div>                   
+                   </div>
+                
+                <div class="side-pic-3">
+                    <img src="assets/a9ae84472d6182a6db739e8b087aedde.jpg" alt="Later years" class="side-image">
+                    <p class="side-caption">[Name] in later years</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer - Using consistent footer class -->
+    <footer class="footer">
+        <p style="padding: 10px;">In loving memory of Mr.Urgessa</p>
+       </footer>
+</body>
+</html>
