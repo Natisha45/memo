@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biography | Remembering [Name]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Crimson+Text:ital,wght@0,400;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         /* Biography Page Specific Styles */
@@ -51,21 +54,8 @@
             align-self: start;
             position: sticky;
             top: 100px;
-            height: calc(100vh - 200px); /* Limits sticking area */
+            height: 380px; /* Fixed height to match image */
             overflow: hidden;
-            transition: all 0.3s ease;
-        }
-         .profile-column::after{
-            content: '';
-            position: absolute;
-            bottom: 10px;
-            left: 50px;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 3px;
-            background: rgba(0,0,0,0.1);
-            border-radius: 2%;
-
         }
         
         .profile-image {
@@ -172,9 +162,6 @@
                 grid-row: 1;
                 position: sticky;
             }
-            .horizontal-break{
-                grid-column: 1 / span 2;
-                }
             /* .side-pictures {
                 display: none;
             }
@@ -200,10 +187,6 @@
                 position: static;
                 max-width: 300px;
                 margin: 0 auto;
-            }
-            .horizontal-break{
-                grid-column: 1;
-                grid-row: 3;
             }
             
             .text-column {
@@ -303,7 +286,6 @@
                     </div>
                 </div>
             </div>
-            <div class="horizontal-break"></div>
             
             <!-- Column 3: Side Pictures -->
             <div class="side-pictures">
