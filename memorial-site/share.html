@@ -115,7 +115,7 @@
     
     .form-group label {
         display: block;
-        margin-bottom: 8px;
+        margin-top: 50px;
         font-weight: 500;
         color: #444;
         font-family: 'Raleway', sans-serif;
@@ -131,12 +131,41 @@
         font-family: 'Crimson Text', serif;
         font-size: 16px;
     }
+    .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+        }
     
     .form-group input:focus, 
     .form-group textarea:focus {
         outline: none;
         border-color: #2D5A27;
     }
+     .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .char-counter {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 5px;
+            ;
+        }
+     .form-notice {
+            background-color: #f9f9f7;
+            border-left: 4px solid #2D5A27;
+            padding: 15px;
+            margin: 25px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
     
     .submit-btn {
         background-color: #2D5A27;
@@ -196,32 +225,90 @@
 
                 <div class="form-group">
                     <label for="relationship">How you knew [Name]</label>
-                    <input type="text" id="relationship" name="relationship" required>
-                </div>
+                    <select id="relationship" name="entry.XXXXXXXX" required>
+                        <option value="">Select relationship...</option>
+                        <option value="family">Family</option>
+                        <option value="friend">Friend</option>
+                        <option value="colleague">Colleague</option>
+                        <option value="neighbor">Neighbor</option>
+                        <option value="mentor">Mentor/Mentee</option>
+                        <option value="other">Other</option>
+                    </select>
 
+                <!-- Memory -->
                 <div class="form-group">
                     <label for="memory">Your Memory</label>
-                    <textarea id="memory" name="memory" rows="6" required></textarea>
+                    <textarea id="memory" name="entry.XXXXXXXX" required placeholder="Share a special moment or what [Name] meant to you..."></textarea>
+                    <div class="char-counter"><span id="charCount">0</span> / 2000 characters</div>
                 </div>
 
                 <div class="form-group">
                     <label for="photo">Add a Photo (Optional)</label>
                     <input type="file" id="photo" name="photo" accept="image/*">
                 </div>
-
+                      <!-- Form Notice -->
+                <div class="form-notice">
+                    <p><strong>Note:</strong> All submissions are reviewed by family before appearing on the site. This helps maintain a respectful and meaningful memorial.</p>
+                </div>
+                    <div id="successMessage" style="display: none; background-color: #e8f4ea; padding: 20px; border-radius: 4px; margin-top: 20px; text-align: center;">
+                <h3 style="color: #2D5A27; margin-bottom: 10px;">Thank You!</h3>
+                <p>Your memory has been submitted and will be reviewed by the family. It may take 1-2 days to appear on the site.</p>
+            </div>
                 <button type="submit" class="submit-btn">Submit Memory</button>
             </form>
         </div>
     </section>
+    
 </main>
 
     <!-- Footer -->
     <footer>
         <div class="footer">
-            <p>In loving memory of [Name]</p>
+            <p>In loving memory of Mr.Urgessa</p>
         </div>
     </footer>
 
     <script src="js/script.js"></script>
+      <script>
+        // Character counter for memory field
+        const memoryField = document.getElementById('memory');
+        const charCount = document.getElementById('charCount');
+        
+        memoryField.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+        
+        // Form submission handling
+        document.getElementById('memoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            if (!this.checkValidity()) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Submit to Google Form (this will redirect)
+            // Note: For actual file uploads, you'll need additional handling
+            this.submit();
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            this.reset();
+            charCount.textContent = '0';
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // File size validation
+        document.getElementById('photo').addEventListener('change', function(e) {
+            const file = this.files[0];
+            if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
+                alert('File size must be less than 5MB.');
+                this.value = '';
+            }
+        });
+    </script>
 </body>
 </html>
