@@ -17,7 +17,7 @@ const footer = `
 <footer>
     <div class="footer">
         <p>In loving memory of Mr.Urgessa</p>
-        <a href="https://your-vercel-url.vercel.app/login" 
+        <a href="https://memorial-admin-panel.vercel.app/login" 
            style="color: #999; font-size: 0.7rem; text-decoration: none; opacity: 0.5;">
             Admin
         </a>
