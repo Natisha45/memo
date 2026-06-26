@@ -6,310 +6,283 @@
     <title>Remembering [Name]</title>
     <link rel="stylesheet" href="style.css">
     <style>
-            
-    section {
-        padding: 40px 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-left: 0; /* FIXED: Removed 25% margin */
-    }
-    
-    .container {
-        max-width: 800px;
-        width: 100%;
-        margin: 0 auto;
-        padding: 20px;
-        text-align: center;
-    }
-    
-    .container h1 {
-        margin-left: 0; /* FIXED */
-        margin-bottom: 15px;
-        color: #2D5A27;
-    }
-    
-    .container p {
-        margin-left: 0; /* FIXED */
-        margin-bottom: 30px;
-        color: #666;
-    }
-   .grid-story{
-    display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
-            gap: 30px; /* Better spacing between cards */
-            width: 100%;
+        .stories-header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+
+        .stories-header h1 {
+            font-size: 2.5rem;
+            color: #2D5A27;
+            margin-bottom: 10px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .stories-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .stories-section {
+            max-width: 1100px;
             margin: 0 auto;
-        
-    }
-    
-    .stories {
-        background-color: cornsilk;
-        padding: 50px;
-        margin-bottom: 25px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        width: 100%; /* FIXED: Changed from 75% */
-        min-width: fit-content;
-        border-radius: 10px;
-        text-align: left;
-    }
-     
-    
-    .stories h2 {
-        margin-bottom: 10px;
-        color: #222;
-    }
-    
-    .stories p {
-        margin-bottom: 15px;
-        color: #444;
-    }
-    
-    .stories a {
-        color: #2D5A27;
-        text-decoration: none;
-        font-weight: 500;
-    }
-    
-    .stories a:hover {
-        text-decoration: underline;
-    }
-     
-    /* Responsive Design for Stories Page */
+            padding: 0 20px 60px;
+        }
 
-/* Tablet Devices (768px - 1024px) */
-@media (max-width: 1024px) {
-    .grid-story {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
-        gap: 25px;
-    }
-    
-    .stories {
-        padding: 35px;
-    }
-    
-    .container h1 {
-        font-size: 2.2rem;
-    }
-    
-    .container p {
-        font-size: 1.1rem;
-    }
-}
+        .grid-story {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
 
-/* Medium Mobile Devices (600px - 768px) */
-@media (max-width: 768px) {
-    section {
-        padding: 30px 15px;
-    }
-    
-    .grid-story {
-        grid-template-columns: 1fr; /* 1 column on mobile */
-        gap: 20px;
-        max-width: 600px;
-    }
-    
-    .stories {
-        padding: 30px;
-        margin-bottom: 15px;
-    }
-    
-    .container {
-        padding: 15px;
-    }
-    
-    .container h1 {
-        font-size: 2rem;
-        margin-bottom: 10px;
-    }
-    
-    .container p {
-        margin-bottom: 25px;
-        font-size: 1rem;
-    }
-}
+        .story-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-/* Small Mobile Devices (below 600px) */
-@media (max-width: 600px) {
-    section {
-        padding: 25px 10px;
-    }
-    
-    .grid-story {
-        gap: 15px;
-    }
-    
-    .stories {
-        padding: 25px 20px;
-    }
-    
-    .stories h2 {
-        font-size: 1.3rem;
-        margin-bottom: 8px;
-    }
-    
-    .stories p {
-        font-size: 0.95rem;
-        margin-bottom: 12px;
-        line-height: 1.5;
-    }
-    
-    .container h1 {
-        font-size: 1.8rem;
-    }
-    
-    .container p {
-        font-size: 0.95rem;
-    }
-}
+        .story-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
 
-/* Extra Small Devices (below 480px) */
-@media (max-width: 480px) {
-    section {
-        padding: 20px 10px;
-    }
-    
-    .stories {
-        padding: 20px 15px;
-    }
-    
-    .stories h2 {
-        font-size: 1.2rem;
-    }
-    
-    .container h1 {
-        font-size: 1.6rem;
-    }
-}
+        .story-card h2 {
+            font-size: 1.2rem;
+            color: #1a3a1a;
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
 
-/* Navigation Responsiveness */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 15px 0;
-    }
-    
-    .nav-links {
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .nav-links li {
-        margin: 5px 0;
-    }
-    
-    .nav-links a {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
-}
+        .story-meta {
+            font-size: 0.82rem;
+            color: #888;
+            display: flex;
+            gap: 16px;
+        }
 
-/* Landscape Orientation on Mobile */
-@media (max-height: 600px) and (orientation: landscape) {
-    section {
-        padding: 20px;
-    }
-    
-    .grid-story {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .stories {
-        padding: 20px;
-    }
-}
-</style>
+        .story-excerpt {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
 
-    
+        .read-more-btn {
+            align-self: flex-start;
+            background: none;
+            border: 1px solid #2D5A27;
+            color: #2D5A27;
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .read-more-btn:hover {
+            background: #2D5A27;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #999;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 680px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .modal h2 {
+            font-size: 1.6rem;
+            color: #1a3a1a;
+            margin-bottom: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            padding-right: 30px;
+        }
+
+        .modal-meta {
+            font-size: 0.82rem;
+            color: #888;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-content {
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-story { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .grid-story { grid-template-columns: 1fr; }
+            .stories-header h1 { font-size: 2rem; }
+            .modal { padding: 28px 20px; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navigation -->
-     <div id="navbar"></div>
+    <div id="navbar"></div>
 
-    <!-- Page content will go here -->
-     <main>
-        <section class="page-container">
-            <div class="container">
-                <h1>Stories</h1>
-                <p>Memories and tributes from those who knew [Name]</p>
+    <main>
+        <div class="stories-header">
+            <h1>Stories & Memories</h1>
+            <p>Tributes shared by those who knew and loved him</p>
+        </div>
+
+        <div class="stories-section">
+            <div class="grid-story" id="storiesGrid">
+                <div class="loading">Loading stories...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 id="modalTitle"></h2>
+            <div class="modal-meta" id="modalMeta"></div>
+            <div class="modal-content" id="modalContent"></div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+    <script src="components.js"></script>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+        const supabase = createClient(
+            'https://fwganmdvjmmsgqlsfgkp.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3Z2FubWR2am1tc2dxbHNmZ2twIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDc2MjcsImV4cCI6MjA5NjkyMzYyN30.PHmmYyBnANjGVzBPWUXKfoXjGV46l4l6l8TKiINQQ5w'
+        );
+
+        const grid = document.getElementById('storiesGrid');
+        const overlay = document.getElementById('modalOverlay');
+        const modalClose = document.getElementById('modalClose');
+
+        // Load approved stories
+        const { data: stories, error } = await supabase
+            .from('stories')
+            .select('*')
+            .eq('status', 'approved')
+            .order('created_at', { ascending: false });
+
+        if (error || !stories || stories.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <p>No stories have been shared yet.</p>
+                    <p>Be the first to <a href="share.html" style="color:#2D5A27">share a memory</a>.</p>
+                </div>`;
+        } else {
+            grid.innerHTML = stories.map(story => `
+                <div class="story-card">
+                    <h2>${story.title}</h2>
+                    <div class="story-meta">
+                        <span>By ${story.author}</span>
+                        <span>${new Date(story.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                    </div>
+                    <p class="story-excerpt">${story.content}</p>
+                    <button class="read-more-btn" data-id="${story.id}">Read More</button>
                 </div>
-            <div class="grid-story">
-                    <div class="stories">
-                        <h2>Tripe to Turky</h2>
-                        <p>This is a brief excerpt or summary of the first story. It gives a glimpse into the memories shared.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum at ea distinctio iusto laboriosam
-                            repudiandae praesentium mollitia voluptates a dignissimos officiis dolores expedita, perferendis doloremque
-                            sunt atque recusandae hic?</p>
-                        <a href="story1.html">Read More</a>
-                    </div>
+            `).join('');
 
-                    <div class="stories">
-                        <h2>Title of the Story 2</h2>
-                        <p>This is a brief excerpt or summary of the second story. It gives a glimpse into the memories shared.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum at ea distinctio iusto laboriosam
-                            repudiandae praesentium mollitia voluptates a dignissimos officiis dolores expedita, perferendis doloremque
-                            sunt atque recusandae hic?</p>
-                        <a href="story2.html">Read More</a>
-                    </div>
-                    <div class="stories">
-                        <h2>Title of the Story 3</h2>
-                        <p>This is a brief excerpt or summary of the third story. It gives a glimpse into the memories shared.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum at ea distinctio iusto laboriosam
-                            repudiandae praesentium mollitia voluptates a dignissimos officiis dolores expedita, perferendis doloremque
-                            sunt atque recusandae hic?</p>
-                        <a href="story3.html">Read More</a>
-                    </div>
-                    <div class="stories">
-                        <h2>Title of the Story 4</h2>
-                        <p>This is a brief excerpt or summary of the fourth story. It gives a glimpse into the memories shared.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum at ea distinctio iusto laboriosam
-                            repudiandae praesentium mollitia voluptates a dignissimos officiis dolores expedita, perferendis doloremque
-                            sunt atque recusandae hic?</p>
-                        <a href="story4.html">Read More</a>
-                    </div>
-                    <div class="stories">
-                        <h2>Title of the Story 5</h2>
-                        <p>This is a brief excerpt or summary of the fifth story. It gives a glimpse into the memories shared.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum at ea distinctio iusto laboriosam
-                            repudiandae praesentium mollitia voluptates a dignissimos officiis dolores expedita, perferendis doloremque
-                            sunt atque recusandae hic?</p>
-                        <a href="story5.html">Read More</a>
-                    </div>
-                    <div class="stories">
-                        <h2>Title of the Story 6</h2>
-                        <p>This is a brief excerpt or summary of the sixth story. It gives a glimpse into the memories shared.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum at ea distinctio iusto laboriosam
-                            repudiandae praesentium mollitia voluptates a dignissimos officiis dolores expedita, perferendis doloremque
-                            sunt atque recusandae hic?</p>
-                        <a href="story6.html">Read More</a>
-                    </div>
-                     <div class="stories">
-                        <h2>Title of the Story 6</h2>
-                        <p>This is a brief excerpt or summary of the sixth story. It gives a glimpse into the memories shared.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum at ea distinctio iusto laboriosam
-                            repudiandae praesentium mollitia voluptates a dignissimos officiis dolores expedita, perferendis doloremque
-                            sunt atque recusandae hic?</p>
-                        <a href="story7.html">Read More</a>
-                    </div>
-                     <div class="stories">
-                        <h2>Title of the Story 6</h2>
-                        <p>This is a brief excerpt or summary of the sixth story. It gives a glimpse into the memories shared.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum at ea distinctio iusto laboriosam
-                            repudiandae praesentium mollitia voluptates a dignissimos officiis dolores expedita, perferendis doloremque
-                            sunt atque recusandae hic?</p>
-                        <a href="story8.html">Read More</a>
-                    </div>
+            // Read More click handler
+            grid.addEventListener('click', (e) => {
+                if (e.target.classList.contains('read-more-btn')) {
+                    const id = parseInt(e.target.dataset.id);
+                    const story = stories.find(s => s.id === id);
+                    if (story) {
+                        document.getElementById('modalTitle').textContent = story.title;
+                        document.getElementById('modalMeta').textContent = 
+                            `By ${story.author} · ${new Date(story.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+                        document.getElementById('modalContent').textContent = story.content;
+                        overlay.classList.add('active');
+                    }
+                }
+            });
+        }
 
-                </div>            
-
-        </section>
-     </main>
-
-    <!-- Footer -->
-   <div id="footer"></div>
-<script src="components.js"></script>
-
-    <script src="js/script.js"></script>
+        // Close modal
+        modalClose.addEventListener('click', () => overlay.classList.remove('active'));
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.classList.remove('active');
+        });
+    </script>
 </body>
 </html>
