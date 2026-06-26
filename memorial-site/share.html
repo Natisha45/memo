@@ -254,47 +254,71 @@
 <div id="footer"></div>
 <script src="components.js"></script>
 
-    <script src="js/script.js"></script>
-      <script>
-        // Character counter for memory field
-        const memoryField = document.getElementById('memory');
-        const charCount = document.getElementById('charCount');
-        
-        memoryField.addEventListener('input', function() {
-            charCount.textContent = this.value.length;
-        });
-        
-        // Form submission handling
-        document.getElementById('memoryForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic validation
-            if (!this.checkValidity()) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Submit to Google Form (this will redirect)
-            // Note: For actual file uploads, you'll need additional handling
-            this.submit();
-            
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-            this.reset();
-            charCount.textContent = '0';
-            
-            // Scroll to success message
-            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        // File size validation
-        document.getElementById('photo').addEventListener('change', function(e) {
-            const file = this.files[0];
-            if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
-                alert('File size must be less than 5MB.');
-                this.value = '';
-            }
-        });
-    </script>
+   <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(
+        'https://fwganmdvjmmsgqlsfgkp.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3Z2FubWR2am1tc2dxbHNmZ2twIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDc2MjcsImV4cCI6MjA5NjkyMzYyN30.PHmmYyBnANjGVzBPWUXKfoXjGV46l4l6l8TKiINQQ5w'
+    );
+
+    const memoryField = document.getElementById('memory');
+    const charCount = document.getElementById('charCount');
+    memoryField.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+    });
+
+    document.getElementById('memoryForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const relationship = document.getElementById('relationship').value;
+        const memory = document.getElementById('memory').value;
+
+        const submitBtn = document.querySelector('.submit-btn');
+        submitBtn.textContent = 'Submitting...';
+        submitBtn.disabled = true;
+
+        const { error: storyError } = await supabase.from('stories').insert([{
+            title: `Memory from ${name}`,
+            content: memory,
+            author: email,
+            status: 'pending',
+            submitted: new Date().toISOString().split('T')[0],
+            last_edited: 'Just now'
+        }]);
+
+        const { error: msgError } = await supabase.from('messages').insert([{
+            type: 'submission',
+            title: `New memory submitted: ${name}`,
+            author: email,
+            content: `${name} (${relationship}) submitted a new memory and is awaiting review.`,
+            read: false
+        }]);
+
+        if (storyError || msgError) {
+            alert('Something went wrong. Please try again.');
+            submitBtn.textContent = 'Submit Memory';
+            submitBtn.disabled = false;
+            return;
+        }
+
+        document.getElementById('successMessage').style.display = 'block';
+        this.reset();
+        charCount.textContent = '0';
+        submitBtn.textContent = 'Submit Memory';
+        submitBtn.disabled = false;
+        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('photo').addEventListener('change', function(e) {
+        const file = this.files[0];
+        if (file && file.size > 5 * 1024 * 1024) {
+            alert('File size must be less than 5MB.');
+            this.value = '';
+        }
+    });
+</script>
 </body>
 </html>
