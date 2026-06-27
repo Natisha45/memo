@@ -267,50 +267,82 @@
     memoryField.addEventListener('input', function() {
         charCount.textContent = this.value.length;
     });
+        document.getElementById('memoryForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-    document.getElementById('memoryForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const relationship = document.getElementById('relationship').value;
+    const memory = document.getElementById('memory').value;
+    const photoFile = document.getElementById('photo').files[0];
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const relationship = document.getElementById('relationship').value;
-        const memory = document.getElementById('memory').value;
+    const submitBtn = document.querySelector('.submit-btn');
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
 
-        const submitBtn = document.querySelector('.submit-btn');
-        submitBtn.textContent = 'Submitting...';
-        submitBtn.disabled = true;
+    // Upload photo to Supabase Storage if provided
+    let photoUrl = null;
+    if (photoFile) {
+        const fileExt = photoFile.name.split('.').pop();
+        const fileName = `submissions/${Date.now()}.${fileExt}`;
 
-        const { error: storyError } = await supabase.from('stories').insert([{
-            title: `Memory from ${name}`,
-            content: memory,
-            author: email,
-            status: 'pending',
-            submitted: new Date().toISOString().split('T')[0],
-            last_edited: 'Just now'
-        }]);
+        const { error: uploadError } = await supabase.storage
+            .from('Media')
+            .upload(fileName, photoFile);
 
-        const { error: msgError } = await supabase.from('messages').insert([{
-            type: 'submission',
-            title: `New memory submitted: ${name}`,
-            author: email,
-            content: `${name} (${relationship}) submitted a new memory and is awaiting review.`,
-            read: false
-        }]);
+        if (!uploadError) {
+            const { data: { publicUrl } } = supabase.storage
+                .from('Media')
+                .getPublicUrl(fileName);
+            photoUrl = publicUrl;
 
-        if (storyError || msgError) {
-            alert('Something went wrong. Please try again.');
-            submitBtn.textContent = 'Submit Memory';
-            submitBtn.disabled = false;
-            return;
+            // Save to media table as pending
+            await supabase.from('media').insert([{
+                title: `Photo from ${name}`,
+                year: new Date().getFullYear().toString(),
+                type: 'photo',
+                src: photoUrl,
+                uploaded_at: new Date().toLocaleDateString('en-US', {
+                    month: 'long', day: 'numeric', year: 'numeric'
+                })
+            }]);
         }
+    }
 
-        document.getElementById('successMessage').style.display = 'block';
-        this.reset();
-        charCount.textContent = '0';
+    // Save story to Supabase
+    const { error: storyError } = await supabase.from('stories').insert([{
+        title: `Memory from ${name}`,
+        content: memory,
+        author: email,
+        status: 'pending',
+        submitted: new Date().toISOString().split('T')[0],
+        last_edited: 'Just now'
+    }]);
+
+    // Save notification to messages
+    const { error: msgError } = await supabase.from('messages').insert([{
+        type: 'submission',
+        title: `New memory submitted: ${name}`,
+        author: email,
+        content: `${name} (${relationship}) submitted a new memory and is awaiting review.${photoUrl ? ' A photo was included.' : ''}`,
+        read: false
+    }]);
+
+    if (storyError || msgError) {
+        alert('Something went wrong. Please try again.');
         submitBtn.textContent = 'Submit Memory';
         submitBtn.disabled = false;
-        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-    });
+        return;
+    }
+
+    document.getElementById('successMessage').style.display = 'block';
+    this.reset();
+    charCount.textContent = '0';
+    submitBtn.textContent = 'Submit Memory';
+    submitBtn.disabled = false;
+    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+});
+    
 
     document.getElementById('photo').addEventListener('change', function(e) {
         const file = this.files[0];
