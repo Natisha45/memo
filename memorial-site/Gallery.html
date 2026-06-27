@@ -5,75 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remembering [Name]</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-       .page-header {
-            background-color: #e2e2e2;
-            padding: 20px 0;
-            text-align: center;
-        }
-        .memories-gallery {
-            padding: 20px 0;
-        }
-        .gallery-filters {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .filter-btn {
-            color: black;
-            padding: 8px 12px;
-            border: none;
-            margin: 0 5px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-        .filter-btn:hover{
-            background-color: #2b38ee;
-        }
-        .gallery-grid   {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .gallery-item {
-            background-color: white;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .gallery-item img {
-            max-width: 100%;
-            height: auto;
-        }
-            
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-         
 
-
-    </style> -->
-
-    <!-- /* New styles*/ -->
     <style>
     body {
         font-family: 'Crimson Text', serif; /* Consistent with other pages */
@@ -273,61 +205,12 @@
             </div>
 
             
-            <div class="gallery-grid">
-    <!-- Photo 1 -->
-    <div class="gallery-item" data-type="photo">
-        <img src="https://via.placeholder.com/300x200?text=Eleanor's+smile" alt="Memory">
-        <div class="gallery-caption">
-            <h3>Eleanor's radiant smile</h3>
-            <p class="year">2024</p>
-        </div>
-    </div>
-    
-    <!-- Photo 2 -->
-    <div class="gallery-item" data-type="photo">
-        <img src="https://via.placeholder.com/300x200?text=Family+gathering" alt="Memory">
-        <div class="gallery-caption">
-            <h3>Family gathering at the Thompson home</h3>
-            <p class="year">2023</p>
-        </div>
-    </div>
-    
-    <!-- Photo 3 -->
-    <div class="gallery-item" data-type="photo">
-        <img src="https://via.placeholder.com/300x200?text=Vintage+photo" alt="Memory">
-        <div class="gallery-caption">
-            <h3>Vintage family memoir</h3>
-            <p class="year">1975</p>
-        </div>
-    </div>
-    
-    <!-- Photo 4 -->
-    <div class="gallery-item" data-type="photo">
-        <img src="https://via.placeholder.com/300x200?text=Memory+4" alt="Memory">
-        <div class="gallery-caption">
-            <h3>Special moments together</h3>
-            <p class="year">2022</p>
-        </div>
-    </div>
-    
-    <!-- Divider line (optional) -->
-    <div class="divider"></div>
-    
-    <!-- Video -->
-    <div class="gallery-item" data-type="video">
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID" 
-                    frameborder="0" 
-                    allowfullscreen></iframe>
-        </div>
-        <div class="gallery-caption">
-            <h3>Celebration video</h3>
-            <p class="year">2023</p>
-        </div>
-    </div>
-    
-    <!-- More photos... -->
-</div>
+                <div class="gallery-grid" id="galleryGrid">
+                <div style="text-align:center; padding: 60px; color: #999; grid-column: 1/-1;">
+                    Loading memories...
+                </div>
+            </div>
+
         </div>
     </section>
 </main>
@@ -335,6 +218,75 @@
 
 <div id="footer"></div>
 <script src="components.js"></script>
-    <script src="logic.js"></script>
+    <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(
+        'https://fwganmdvjmmsgqlsfgkp.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3Z2FubWR2am1tc2dxbHNmZ2twIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDc2MjcsImV4cCI6MjA5NjkyMzYyN30.PHmmYyBnANjGVzBPWUXKfoXjGV46l4l6l8TKiINQQ5w'
+    );
+
+    const grid = document.getElementById('galleryGrid');
+    let allMedia = [];
+    let currentFilter = 'all';
+
+    const { data: media, error } = await supabase
+        .from('media')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    if (error || !media || media.length === 0) {
+        grid.innerHTML = `
+            <div style="text-align:center; padding: 60px; color: #999; grid-column: 1/-1;">
+                <p>No memories have been added yet.</p>
+            </div>`;
+    } else {
+        allMedia = media;
+        renderGallery('all');
+    }
+
+    function renderGallery(filter) {
+        const filtered = filter === 'all' 
+            ? allMedia 
+            : allMedia.filter(m => m.type === filter);
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `
+                <div style="text-align:center; padding: 60px; color: #999; grid-column: 1/-1;">
+                    <p>No ${filter} found.</p>
+                </div>`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map(item => `
+            <div class="gallery-item" data-type="${item.type}">
+                ${item.type === 'video'
+                    ? `<div class="video-wrapper">
+                            <video src="${item.src}" controls style="width:100%; height:100%; object-fit:cover;"></video>
+                       </div>`
+                    : `<img src="${item.src}" alt="${item.title}" loading="lazy">`
+                }
+                <div class="gallery-caption">
+                    <h3>${item.title || 'Untitled'}</h3>
+                    <p class="year">${item.year || ''}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+            // map 'photos' to 'photo' and 'videos' to 'video'
+            const filterValue = currentFilter === 'photos' ? 'photo' 
+                              : currentFilter === 'videos' ? 'video' 
+                              : 'all';
+            renderGallery(filterValue);
+        });
+    });
+</script>
 </body>
 </html>
