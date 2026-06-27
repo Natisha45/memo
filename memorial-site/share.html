@@ -324,7 +324,7 @@
         type: 'submission',
         title: `New memory submitted: ${name}`,
         author: email,
-        content: `${name} (${relationship}) submitted a new memory and is awaiting review.${photoUrl ? ' A photo was included.' : ''}`,
+        content: `Submitted by: ${name}\nEmail: ${email}\nRelationship: ${relationship}\n\nMemory:\n${memory}${photoUrl ? '\n\nA photo was included with this submission.' : ''}`,
         read: false
     }]);
 
