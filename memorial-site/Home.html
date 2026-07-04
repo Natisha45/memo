@@ -214,27 +214,17 @@
             </div>
         </section>
 
-        <!-- Recent Stories -->
-        <section class="stories-preview">
-            <div class="container">
-                <h2>Recent Stories</h2>
-                <div class="stories-grid">
-                    <!-- Stories will be loaded here -->
-                    <div class="story-card">
-                        <h3>A Wonderful Friend</h3>
-                        <p>I'll always remember our walks in the park and the way you made everyone smile...</p>
-                    </div>
-                    <div class="story-card">
-                        <h3>Family Memories</h3>
-                        <p>Thank you for all the love and wisdom you shared with our family over the years...</p>
-                    </div>
-                    <div class="story-card">
-                        <h3>Unforgettable Moments</h3>
-                        <p>Your kindness touched so many lives, including mine. I'll never forget...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+       <section class="stories-preview">
+    <div class="container">
+        <h2>Recent Stories</h2>
+        <div class="stories-grid" id="recentStoriesGrid">
+            <p style="color:#999; text-align:center;">Loading stories...</p>
+        </div>
+        <div style="text-align:center; margin-top:28px;">
+            <a href="stories.html" class="btn">View All Stories</a>
+        </div>
+    </div>
+</section>
 
         <!-- Call to Action -->
         <section class="cta">
@@ -251,6 +241,34 @@
 <div id="footer"></div>
 <script src="components.js"></script>
    
-    <script src="js/script.js"></script>
+   <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(
+        'https://fwganmdvjmmsgqlsfgkp.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3Z2FubWR2am1tc2dxbHNmZ2twIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDc2MjcsImV4cCI6MjA5NjkyMzYyN30.PHmmYyBnANjGVzBPWUXKfoXjGV46l4l6l8TKiINQQ5w'
+    );
+
+    const grid = document.getElementById('recentStoriesGrid');
+
+    const { data: stories, error } = await supabase
+        .from('stories')
+        .select('*')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false })
+        .limit(3);
+
+    if (error || !stories || stories.length === 0) {
+        grid.innerHTML = `<p style="color:#999; text-align:center; grid-column:1/-1;">No stories have been shared yet.</p>`;
+    } else {
+        grid.innerHTML = stories.map(story => `
+            <div class="story-card">
+                <h3>${story.title}</h3>
+                <p>${story.content.length > 120 ? story.content.substring(0, 120) + '...' : story.content}</p>
+                <a href="stories.html">Read More</a>
+            </div>
+        `).join('');
+    }
+</script>
 </body>
 </html>

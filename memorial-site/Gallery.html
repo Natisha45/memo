@@ -233,10 +233,11 @@
     const { data: media, error } = await supabase
         .from('media')
         .select('*')
+        .eq('status', 'approved')
         .order('created_at', { ascending: false });
 
     if (error || !media || media.length === 0) {
-        grid.innerHTML = `
+        grid.innerHTML = `const 
             <div style="text-align:center; padding: 60px; color: #999; grid-column: 1/-1;">
                 <p>No memories have been added yet.</p>
             </div>`;
