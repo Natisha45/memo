@@ -137,21 +137,21 @@
             font-size: 1.1rem;
         }
         
-        .cta a.btn {
+        .btn {
             display: inline-block;
-            padding: 14px 35px;
+            padding: 12px 24px;
             background-color: #2D5A27;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-family: 'Raleway', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: background-color 0.3s;
             border: none;
             cursor: pointer;
         }
         
-        .cta a.btn:hover {
+        .btn:hover {
             background-color: #3A6B34;
         }
         
@@ -208,8 +208,8 @@
                 <img src="assets/MR.K-removebg-preview.png" alt="profile picture" class="hero-image">
                 <div class="content">
                     <h1>In Loving Memory of Mr.Urgessa</h1>
-                    <p>[Dates] - Forever in our hearts</p>
-                    <p>A space to remember, share stories, and celebrate a life well-lived.</p>
+                    <p>April 8, 2001 - Forever in our hearts</p>
+                    <p>A space to remember, share stories,inspire others and celebrate a life well-lived by Mr.Urgessa.</p>
                 </div>
             </div>
         </section>
@@ -231,7 +231,7 @@
         <section class="cta">
             <div class="container">
                 <h2>Share Your Memory</h2>
-                <p>Help us keep the memory alive by sharing your story.</p>
+                <p>Help us keep the memory of Mr.Urgessa alive and inspire others by sharing your story.</p>
                 <a href="share.html" class="btn">Share Now</a>
             </div>
         </section>
@@ -266,7 +266,7 @@
             <div class="story-card">
                 <h3>${story.title}</h3>
                 <p>${story.content.length > 120 ? story.content.substring(0, 120) + '...' : story.content}</p>
-                <a href="stories.html">Read More</a>
+                <a href="stories.html" class="btn">Read More</a>
             </div>
         `).join('');
     }
