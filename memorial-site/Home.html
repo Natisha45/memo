@@ -6,192 +6,242 @@
     <title>Remembering [Name]</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Full Screen Hero Section */
+        /* ================= HERO ================= */
         .hero {
-            background-image: url('assets/download.jpg'); /* Background on hero section */
-            background-size: cover;               /* Cover entire area */
-            background-position: center center;   /* Center the image */
-            background-repeat: no-repeat;         /* No repeating */
-            
-            width: 100%;                          /* Full width */
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
-            padding: 0;
-            margin: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
-        
-        /* Optional overlay for better text readability */
-        .hero::before {
-            content: '';
+
+        .hero-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2); /* Dark overlay - adjust opacity */
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,.28);
             z-index: 1;
         }
-        
-        /* Container inside hero */
+
+        .hero #navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+        }
+
+        .hero #navbar .navbar {
+            background: transparent;
+            padding: 20px 40px;
+            margin-bottom: 0;
+        }
+
+        .hero #navbar .nav-links a {
+            color: white;
+        }
+
+        .hero #navbar .nav-links a:hover,
+        .hero #navbar .nav-links a.active {
+            color: #fff;
+        }
+
+        .hero #navbar .nav-links {
+            z-index: 1002;
+        }
+
+        .hero #navbar .open-sidebar-btn {
+            z-index: 1003;
+        }
+
         .hero .container {
             position: relative;
             z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            padding: 40px 20px;
-            background: none; /* Remove previous background */
-            width: 100%;
             max-width: 1200px;
-        }
-        
-        /* Hero image styling */
-        .hero-image {
-            width: 300px;
-            height: 300px;
-            object-fit: cover; /* Changed from contain to cover */
-            border-radius: 50%;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            border: 5px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Content area */
-        .content {
+            width: 100%;
+            padding: 40px;
             display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Align text to left */
-            text-align: left; /* Text aligned left */
-            gap: 15px;
-            max-width: 600px;
-            color: white; /* White text for contrast */
+            justify-content: space-between;
+            align-items: center;
+            gap: 80px;
         }
-        
+
+        .hero-image {
+            width: 340px;
+            height: 340px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+        }
+
+        .content {
+            color: white;
+            max-width: 650px;
+        }
+
         .content h1 {
-            margin: 0;
-            line-height: 1.3;
-            font-size: 3rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 4rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            font-weight: 500;
+            text-shadow: 0 8px 25px rgba(0,0,0,.4);
         }
-        
-        .content p {
-            margin: 0;
-            line-height: 1.6;
+
+        .date {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            opacity: .95;
+        }
+
+        .description {
             font-size: 1.2rem;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            line-height: 1.8;
+            max-width: 580px;
+            margin-bottom: 35px;
         }
-        
-        /* Stories preview section */
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #2D5A27;
+            color: white;
+            border: 1px solid transparent;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: .35s;
+        }
+
+        .btn:hover {
+            background: #3A6B34;
+            color: white;
+        }
+
+        .hero .btn {
+            background: rgba(255,255,255,.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,.3);
+            color: white;
+        }
+
+        .hero .btn:hover {
+            background: white;
+            color: #2D5A27;
+        }
+
         .stories-preview {
             padding: 60px 20px;
             background-color: #f9f9f7;
-            
         }
+
         .story-card {
-            background-color:cornsilk;;
+            background-color: cornsilk;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border-radius: 8px;
         }
-        
+
         .stories-preview .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .stories-preview h2 {
             text-align: center;
             margin-bottom: 30px;
             color: #2D5A27;
         }
-        
+
         .stories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
             margin-top: 20px;
         }
-        
-        /* CTA Section */
+
         .cta {
             text-align: center;
             padding: 60px 20px;
             background-color: white;
         }
-        
+
         .cta .container {
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         .cta h2 {
             margin-bottom: 15px;
             color: #2D5A27;
         }
-        
+
         .cta p {
             margin-bottom: 25px;
             color: #666;
             font-size: 1.1rem;
         }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #2D5A27;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-family: 'Raleway', sans-serif;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background-color: #3A6B34;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 900px) {
+
+        @media (max-width: 950px) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+            }
+
             .hero .container {
                 flex-direction: column;
                 text-align: center;
-                gap: 30px;
+                gap: 40px;
+                padding: 120px 30px 80px;
             }
-            
+
             .content {
-                align-items: center;
                 text-align: center;
             }
-            
+
             .hero-image {
-                width: 250px;
-                height: 250px;
+                width: 260px;
+                height: 260px;
             }
-            
+
             .content h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
+            }
+
+            .description {
+                margin: auto;
             }
         }
-        
+
         @media (max-width: 600px) {
             .hero-image {
-                width: 200px;
-                height: 200px;
+                width: 210px;
+                height: 210px;
             }
-            
+
             .content h1 {
-                font-size: 2rem;
+                font-size: 2.3rem;
             }
-            
-            .content p {
+
+            .date {
+                font-size: 1.1rem;
+            }
+
+            .description {
                 font-size: 1rem;
             }
-            
+
             .stories-grid {
                 grid-template-columns: 1fr;
             }
@@ -199,20 +249,50 @@
     </style>
 </head>
 <body>
-  <div id="navbar"></div>
     <!-- Main Content -->
     <main>
         <!-- Hero Section with Full Background -->
-        <section class="hero">
-            <div class="container">
-                <img src="assets/MR.K-removebg-preview.png" alt="profile picture" class="hero-image">
-                <div class="content">
-                    <h1>In Loving Memory of Mr.Urgessa</h1>
-                    <p>April 8, 2001 - Forever in our hearts</p>
-                    <p>A space to remember, share stories,inspire others and celebrate a life well-lived by Mr.Urgessa.</p>
-                </div>
-            </div>
-        </section>
+    <!-- Hero Section -->
+<section class="hero">
+
+    <!-- Background Video -->
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="assets/kling_20260704_Image_to_Video_the_water__5682_0.mp4" type="video/mp4">
+        
+    </video>
+
+    <div class="overlay"></div>
+
+    <div id="navbar"></div>
+
+    <div class="container">
+
+        <img src="assets/mr-urgessa-cutout.png"
+             alt="Mr. Urgessa"
+             class="hero-image">
+
+        <div class="content">
+
+            <h1>In Loving Memory of<br>Mr. Urgessa</h1>
+
+            <p class="date">
+                April 8, 2001 — Forever in our hearts
+            </p>
+
+            <p class="description">
+                A place to remember, share stories, inspire others,
+                and celebrate a life well-lived by Mr. Urgessa.
+            </p>
+
+            <a href="share.html" class="btn">
+                Share a Memory
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
       <!-- Recent Stories -->
 <section class="stories-preview">

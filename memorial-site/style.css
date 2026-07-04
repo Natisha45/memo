@@ -108,7 +108,7 @@ footer p {
         position: fixed;
         top: 20px;
         right: 20px;
-        z-index: 1000;
+        z-index: 1100;
     }
     
     /* Hide regular nav links by default on mobile */
@@ -120,7 +120,7 @@ footer p {
         position: fixed;
         top: 0;
         right: 0;
-        z-index: 999;
+        z-index: 1090;
         width: 280px;
         height: 100vh;
         background-color: rgba(255, 255, 255, 0.98);
@@ -130,6 +130,10 @@ footer p {
         margin: 0;
         transition: transform 0.3s ease;
         transform: translateX(100%);
+    }
+
+    .navbar {
+        z-index: 1100;
     }
     
     /* When checkbox is checked, show menu */
