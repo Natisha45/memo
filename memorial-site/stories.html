@@ -254,7 +254,6 @@
                 <div class="story-card">
                     <h2>${story.title}</h2>
                     <div class="story-meta">
-                        <span>By ${story.author}</span>
                         <span>${new Date(story.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                     </div>
                     <p class="story-excerpt">${story.content}</p>
@@ -270,7 +269,7 @@
                     if (story) {
                         document.getElementById('modalTitle').textContent = story.title;
                         document.getElementById('modalMeta').textContent = 
-                            `By ${story.author} · ${new Date(story.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+                            `${new Date(story.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
                         document.getElementById('modalContent').textContent = story.content;
                         overlay.classList.add('active');
                     }
